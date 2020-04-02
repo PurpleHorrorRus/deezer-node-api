@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/acostes/deezer-node-api#readme",
   "dependencies": {
-    "got": "^10.7.0"
+    "node-fetch": "^2.6.0"
   },
   "author": "Arnaud Costes <arnaud.costes@gmail.com>",
   "license": "MIT",
