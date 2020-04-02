@@ -5,7 +5,7 @@ class Deezer {
     request = async (url, _params) => {
         url = `https://api.deezer.com/${url}`;
         url = url.toLowerCase();
-        
+
         if (_params !== null) 
             url += "?" + querystring.encode(_params);
 
@@ -18,8 +18,8 @@ class Deezer {
     getArtist = async id => await this.request(`artist/${id}`);
 
     findTracks = async options => await this.request("search", options);
-    findAlbums = async options => await this.request("search/albums", options);
-    findArtist = async options => await this.request("search/artist", options);
+    findAlbums = async options => await this.request("search/album", options);
+    findArtists = async options => await this.request("search/artist", options);
 };
 
 module.exports = Deezer;
