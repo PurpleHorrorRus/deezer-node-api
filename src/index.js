@@ -1,54 +1,25 @@
-var rp = require('request-promise');
+const got = require("got");
+const querystring = require("querystring");
 
-function Deezer() {
-    this.apiUrl = 'https://api.deezer.com/';
-}
+class Deezer {
+    request = async params => {
+        params.url = `https://api.deezer.com/${params.url}`;
+        params.url = params.url.toLowerCase();
+        return await got(params.url, { allowGetBody: true, json: true }).json();
+    };
 
-Deezer.prototype.getTrack = function(id) {
-    var url = 'track/' + id;
-    return rp({url: this.apiUrl + url, json:true});
-};
+    _request = async (url, options) => {
+        const query = querystring.encode(options);
+        return await this.request({ url: `${url}?${query}` });
+    };
 
-Deezer.prototype.getAlbum = function(id) {
-    var url = 'album/' + id;
-    return rp({url: this.apiUrl + url, json:true});
-};
+    getTrack = async id => await this.request({ url: `track/${id}` });
+    getAlbum = async id => await this.request({ url: `album/${id}` });
+    getArtist = async id => await this.request({ url: `artist/${id}` });
 
-Deezer.prototype.getArtist = function(id) {
-    var url = 'artist/' + id;
-    return rp({url: this.apiUrl + url, json:true});
-};
-
-Deezer.prototype.findTracks = function(options, index, order) {
-    var url = 'search?q=';
-    var query = '';
-    if (typeof options === 'object') {
-        for (var key in options) {
-            query = query + key + ':"' + options[key] + '" ';
-        }
-    } else {
-        query = options;
-    }
-    url = url + query;
-
-    if (index !== 0) url = url + '&index=' + index;
-    if (order) url = url + '&order=' + order;
-
-    return rp({url: this.apiUrl + url, json:true});
-};
-
-Deezer.prototype.findAlbums = function(query, index) {
-    var url = 'search/album?q=' + query;
-    if (index !== 0) url = url + '&index=' + index;
-
-    return rp({url: this.apiUrl + url, json:true});
-};
-
-Deezer.prototype.findArtists = function(query, index) {
-    var url = 'search/artist?q=' + query;
-    if (index !== 0) url = url + '&index=' + index;
-
-    return rp({url: this.apiUrl + url, json:true});
+    findTracks = async options => await this._request("search", options);
+    findAlbums = async options => await this._request("search/albums", options);
+    findArtist = async options => await this._request("search/artist", options);
 };
 
 module.exports = Deezer;

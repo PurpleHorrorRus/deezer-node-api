@@ -3,17 +3,7 @@
   "version": "0.3.0",
   "description": "Wrapper for the Deezer API",
   "main": "src/index.js",
-  "bin": {
-    "mocha": "./node_modules/.bin/mocha",
-    "eslint": "./node_modules/.bin/eslint",
-    "nyc": "./node_modules/.bin/nyc",
-    "coveralls": "./node_modules/.bin/coveralls"
-  },
-  "scripts": {
-    "test": "mocha test",
-    "lint": "eslint src",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
-  },
+  "scripts": {},
   "keywords": [
     "deezer",
     "api"
@@ -27,16 +17,9 @@
   },
   "homepage": "https://github.com/acostes/deezer-node-api#readme",
   "dependencies": {
-    "request": "2.87.0",
-    "request-promise": "4.2.2"
+    "got": "^10.7.0"
   },
   "author": "Arnaud Costes <arnaud.costes@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "coveralls": "3.0.1",
-    "eslint": "5.0.0",
-    "mocha": "5.2.0",
-    "nyc": "12.0.2",
-    "unit.js": "~2.0.0"
-  }
+  "devDependencies": {}
 }
